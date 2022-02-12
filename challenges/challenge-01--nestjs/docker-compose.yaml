@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    entrypoint: sh -c "npm install && npm install @nestjs/typeorm typeorm && npm install sqlite3 && npm run start:dev"
+    volumes:
+      - .:/home/node/app
+    ports:
+      - 3018:3000
+
+  db:
+    image: nouchka/sqlite3
+    volumes:
+      - ./.docker/db/:/root/db/
